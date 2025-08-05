@@ -1,0 +1,56 @@
+setup:
+  r-icarus: ../../common/envs/r-icarus.yaml
+  py-icarus: ../../common/envs/py-icarus.yaml
+
+data:
+  inputs:
+    cna_annotated: ../../data/wes/somatic_cna/somatic_calls_union_ann.tsv.gz
+    cna_pass: ../../data/wes/somatic_cna/somatic_calls.tsv.gz
+    cln_curated: ../../data/cln/curated/cln_icarus_curated_with_qc.tsv
+    drug: ../../data/resources/Table_Drugs_v8.xlsx
+    ids_curated: ../../data/cln/curated/ids_icarus_curated.tsv
+    ids_anonym: ../../results/tables_paper/table_anonymisation.tsv
+    sam: ../../data/cln/curated/sam_icarus_curated.tsv
+    mut_annotated: ../../data/wes/somatic_maf/somatic_calls_union_ann.maf.gz
+    mut_pass: ../../data/wes/somatic_maf/somatic_calls.maf.gz
+    pathways: ../../data/resources/pathways/data/msigdb_pathways.tsv.gz
+
+  outputs:
+    alterations_best: ../../results/wes_analysis/alterations/aggregated_alterations_best.tsv
+    alterations_all: ../../results/wes_analysis/alterations/aggregated_alterations_all.tsv
+    alterations: ../../results/wes_analysis/alterations/aggregated_alterations.tsv
+
+
+oncoplots:
+  # === BREAST PLOTS ===
+
+  # Drivers
+  - name: "breast/drivers_only/baseline_only_count_min_1_benefit"
+    params: {annotated_only: "yes", inactivating_only: "no", extended: "no", threshold_alt: 1, subs_select: "breast", sams_select: "bas", tests_alt: "two-sided", col_side: "benefit", anonymize: "no"}
+  - name: "breast/drivers_only/baseline_only_count_min_2_benefit"
+    params: {annotated_only: "yes", inactivating_only: "no", extended: "no", threshold_alt: 2, subs_select: "breast", sams_select: "bas", tests_alt: "two-sided", col_side: "benefit", anonymize: "no"}
+  - name: "breast/drivers_only/baseline_eot_count_min_2_in_eot_benefit"
+    params: {annotated_only: "yes", inactivating_only: "no", extended: "no", threshold_alt: 2, subs_select: "breast", sams_select: "baseot", tests_alt: "two-sided", col_side: "benefit", anonymize: "no"}
+
+  # Non-synonym extended
+  - name: "breast/non_synonym_extended/baseline_only_gene_list_breast_and_all_benefit"
+    params: {annotated_only: "no", inactivating_only: "no", extended: "yes", threshold_alt: 1, subs_select: "breast", gene_list_names: ["BREAST-specific", "All"], sams_select: "bas", tests_alt: "two-sided", col_side: "benefit", anonymize: "no"}
+  - name: "breast/non_synonym_extended/baseline_eot_gene_list_breast_and_all_timepoint"
+    params: {annotated_only: "no", inactivating_only: "no", extended: "yes", threshold_alt: 1, subs_select: "breast", gene_list_names: ["BREAST-specific", "All"], sams_select: "baseot", tests_alt: "two-sided", col_side: "timepoint", anonymize: "no"}
+
+
+  # === LUNG PLOTS ===
+
+  # Drivers
+  - name: "lung/drivers_only/baseline_only_count_min_1_benefit"
+    params: {annotated_only: "yes", inactivating_only: "no", extended: "no", threshold_alt: 1, subs_select: "lung", sams_select: "bas", tests_alt: "two-sided", col_side: "benefit", anonymize: "no"}
+  - name: "lung/drivers_only/baseline_only_count_min_2_benefit"
+    params: {annotated_only: "yes", inactivating_only: "no", extended: "no", threshold_alt: 2, subs_select: "lung", sams_select: "bas", tests_alt: "two-sided", col_side: "benefit", anonymize: "no"}
+  - name: "lung/drivers_only/baseline_eot_count_min_2_in_eot_benefit"
+    params: {annotated_only: "yes", inactivating_only: "no", extended: "no", threshold_alt: 2, subs_select: "lung", sams_select: "baseot", tests_alt: "two-sided", col_side: "benefit", anonymize: "no"}
+
+  # Non-synonym extended
+  - name: "lung/non_synonym_extended/baseline_only_gene_list_lung_and_all_benefit"
+    params: {annotated_only: "no", inactivating_only: "no", extended: "yes", threshold_alt: 1, subs_select: "lung", gene_list_names: ["LUNG-specific", "All"], sams_select: "bas", tests_alt: "two-sided", col_side: "benefit", anonymize: "no"}
+  - name: "lung/non_synonym_extended/baseline_eot_gene_list_lung_and_all_timepoint"
+    params: {annotated_only: "no", inactivating_only: "no", extended: "yes", threshold_alt: 1, subs_select: "lung", gene_list_names: ["LUNG-specific", "All"], sams_select: "baseot", tests_alt: "two-sided", col_side: "timepoint", anonymize: "no"}

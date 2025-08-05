@@ -1,17 +1,20 @@
-# Project specific
-docs/
-results/
-functions/**/build
-functions/**/dist
-._sync_*
-code/**/resources
-**/config/**.tsv
-
-# Tags
-*tags
+# Project-specific
+devel*
+results*
+workflow/logs*
+workflow/benchmark*
+workflow/efficiencies*
+config_*
+config_*/*.tsv
+resources
+external
+.snakemake
+utils
 
 # Logs
 *.log
+logs/
+benchmark
 
 # Tags
 *tags
@@ -44,15 +47,11 @@ renv/
 .Rhistory
 .Rproj.user
 
-# Config files
-.ycm_extra_conf.py
-
 # Open cached files
 *.m~
 *.*swp
 *.*swo
 ~$*.*pptx
-~$*.*xlsx
 
 # Compiled sources
 *.com
@@ -61,8 +60,3 @@ renv/
 *.exe
 *.o
 *.so
-
-# Pipelines
-.snakemake/
-benchmarks/
-logs/

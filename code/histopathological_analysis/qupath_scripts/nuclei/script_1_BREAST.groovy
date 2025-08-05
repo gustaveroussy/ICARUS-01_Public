@@ -1,0 +1,2 @@
+setImageType('BRIGHTFIELD_H_DAB');
+setColorDeconvolutionStains('{"Name" : "H-DAB estimated", "Stain 1" : "Hematoxylin", "Values 1" : "0.59548 0.59548 0.53927", "Stain 2" : "DAB", "Values 2" : "0.32397 0.51781 0.79178", "Background" : " 249 249 249"}');

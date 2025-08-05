@@ -1,0 +1,27 @@
+# @created: 10 Jan 2023
+# @modified: 10 Jan 2023
+# @author: Yoann Pradat
+#
+# This pipeline prepares tables for sharing data.
+
+include: "rules/common.smk"
+
+##### Target rules #####
+
+rule all:
+    input:
+        ### Data tables
+        config["data"]["outputs"]["summary_data"]
+
+##### Modules #####
+
+include: "../common/rules/setup.smk"
+include: "rules/tables.smk"
+
+##### End messages #####
+
+onsuccess:
+    print("Workflow finished, no error")
+
+onerror:
+    print("An error occurred")

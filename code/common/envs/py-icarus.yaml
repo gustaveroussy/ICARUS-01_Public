@@ -1,0 +1,36 @@
+name: py-icarus
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Core scientific computing
+  - python=3.9
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - statsmodels
+
+  # Plotting and visualization
+  - matplotlib
+  - seaborn
+  - plotly
+  - bokeh
+  - holoviews
+  - palettable
+
+  # Utilities
+  - openpyxl
+  - tqdm
+  - click
+  - requests
+  - setuptools
+  - shapely
+
+  # Pip for packages not on conda or for specific versions
+  - pip
+
+  - pip:
+    # This syntax tells pip to install in editable mode (-e)
+    # from a git repository.
+    - "-e git+https://github.com/ypradat/comut.git#egg=comut"

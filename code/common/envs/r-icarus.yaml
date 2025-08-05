@@ -1,0 +1,10 @@
+name: r-icarus
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - r-argparse
+  - r-base
+  - r-tidyverse
+  - r-httr
+  - r-openxlsx

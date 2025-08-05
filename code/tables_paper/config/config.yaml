@@ -1,0 +1,17 @@
+setup:
+  DAISY: ../../common/envs/DAISY.yaml
+
+data:
+  inputs:
+    daisy_pfs_response: ../../data/cln/raw/20220608_DAISY_export_20211019_pfs_response_HR.xlsx
+    wes_ids: ../../data/wes/config/design.all.tsv
+    wes_qc_annotated: ../../data/wes/wes_analyses_summary_annotated.xlsx
+    slide_ids: ../../data/slides/DAISY_HER2_slides_used.xlsx
+    geomx_ids: ../../data/geomx/Annotations_ALL_Batches_20221219.tsv
+    ids_anonym: ../../results/tables_paper/table_anonymisation.tsv
+    sam_used: ../../data/cln/curated/summary_samples_used.xlsx
+
+  outputs:
+    summary_data: ../../data/table_summary_daisy_data.xlsx
+    ega_samples: ../../results/tables_paper/ega/wes_ega_samples.tsv
+    ega_metadata: ../../results/tables_paper/ega/wes_ega_metadata.xlsx

@@ -1,0 +1,9 @@
+name: metaprism_somalier
+channels:
+  - anaconda
+  - bioconda
+  - conda-forge
+  - r
+  - defaults
+dependencies:
+  - somalier

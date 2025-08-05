@@ -1,0 +1,43 @@
+# @created: 05 Jan 2023
+# @modified: 05 Aug 2024
+# @author: Yoann Pradat
+#
+# This pipeline combines alterations (mutations, copy-number) annotated in OncoKB (https://www.oncokb.org/)
+# and/or CIViC database (https://civicdb.org/home) and draws all plots that are based on these alterations.
+
+include: "rules/common.smk"
+
+##### Target rules #####
+
+def get_all_oncoplot_outputs(config):
+    outputs = []
+    for plot in config["oncoplots"]:
+        base_path = f"{R_FOLDER}/oncoplot/{plot['name']}"
+        outputs.append(f"{base_path}.pdf")
+        outputs.append(f"{base_path}.xlsx")
+    return outputs
+
+
+rule all:
+    input:
+        #### ALTERATIONS ####
+        config["data"]["outputs"]["alterations_best"],
+        config["data"]["outputs"]["alterations_all"],
+        config["data"]["outputs"]["alterations"],
+        expand("%s/alterations/alterations_{gene}_all.xlsx" % R_FOLDER, gene=["ERBB2", "SLX4", "PARG", "PIK3CA"]),
+        #### ONCOPLOTS ####
+        get_all_oncoplot_outputs(config)
+
+
+##### Modules #####
+
+include: "rules/aggregate.smk"
+include: "rules/plotting.smk"
+
+##### End messages #####
+
+onsuccess:
+    print("Workflow finished, no error")
+
+onerror:
+    print("An error occurred")
