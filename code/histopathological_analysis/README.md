@@ -26,6 +26,11 @@ To ensure reproducibility, we also provide an `environment.yml` and a `requireme
 ```bash
 conda env create -f environment.yml
 conda activate icarus
+```
+
+or
+
+```bash
 pip install -r requirements.txt --no-deps
 ```
 
@@ -108,7 +113,7 @@ To reproduce the Icarus project results, follow these steps:
 
     Finally, compute embeddings based on the nuclei segmentation from CellViT processed by the script `5_script_prepare_materials_for_reg.py`, as well as staining features from the registered patches on IHC OME-TIFF slides, using the script `8_script_embedding_reg.py`.
 
-    For ICARUS LUNG, the registration was also used to provide an interpretation of clustering results after DAISY-like analysis. You may reproduce this analysis by employing the same steps above, but, this time, using the  `7_script_warp_coords.py` script with the IHC slides as the source and the H&E slides as the target (you can keep the same registation models used for H&E to IHC warping). You also need to use the tag `--bbox_origin_dir` to offset the coordinates of the patches computed on the whole slide (of size 80) to the coordinates of the ROI of the IHC slide. You can then use the script `8_script_embedding_reg.py` to compute interpretable embeddings (be careful about the patch size that should be set to 80 here and not default 128)
+    For ICARUS LUNG, the registration was also used to provide an interpretation of clustering results after DAISY-like analysis. You may reproduce this analysis by employing the same steps above, but, this time, using the  `7_script_warp_coords.py` script with the IHC slides as the source and the H&E slides as the target (you can keep the same registation models used for H&E to IHC warping). You also need to use the tag `--bbox_origin_dir` to offset the coordinates of the patches computed on the whole slide (of size 80) to the coordinates of the ROI of the IHC slide. You can then use the script `8_script_embedding_reg.py` to compute interpretable embeddings (be careful about the patch size that should be set to 80 here and not default 128).
 
 For all these analyses, you may use the provided notebooks for data processing and the R scripts for figures and statistical analysis.
 
