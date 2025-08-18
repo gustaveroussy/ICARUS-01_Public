@@ -50,5 +50,4 @@ if __name__ == "__main__":
         # Extract the nuclei
         slide_embedder.segment_nuclei(slide_name, slide_ext=args.slide_ext)
         # Save the nuclei
-        slide_embedder.save_nuclei(args.results_directory, slide_ext=args.slide_ext)
-        break
+        slide_embedder.save_nuclei(args.results_directory, slide_ext=args.slide_ext, flush_memory=False)

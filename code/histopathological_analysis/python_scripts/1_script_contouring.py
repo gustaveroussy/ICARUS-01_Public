@@ -8,7 +8,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Extract tissue contours from slides")
     parser.add_argument("--slide_directory", type=str, help="Path to the directory containing the files")
     parser.add_argument("--slide_type", type=str, choices=["HE", "IHC"], help="Slide type between 'HE' and 'IHC'")
-    parser.add_argument("--engine", type=str, choices=["openslide", "tiffslide"], help="Engine to use for reading the slides")
+    parser.add_argument("--engine", type=str, choices=["openslide", "tiffslide"], default="openslide", help="Engine to use for reading the slides")
     parser.add_argument("--annotations_directory", type=str, default=None, 
                         help="Path to the directory containing the pathologist annotations")
     parser.add_argument("--results_directory", type=str, default=None, help="Path to the directory where the results will be saved")

@@ -26,11 +26,6 @@ To ensure reproducibility, we also provide an `environment.yml` and a `requireme
 ```bash
 conda env create -f environment.yml
 conda activate icarus
-```
-
-or
-
-```bash
 pip install -r requirements.txt --no-deps
 ```
 
@@ -75,14 +70,14 @@ To reproduce the Icarus project results, follow these steps:
     ```bash
     python python_scripts/1_script_contouring.py --slide_directory path_to_IHC_slides --slide_type IHC --annotations_directory path_to_annotations --results_directory path_to_results
 
-    python python_scripts/2_script_patching.py --slide_directory path_to_IHC_slides --slide_type IHC --annotations_directory path_to_annotations --contours_directory path_to_IHC_contours --patch_size 80 --overlap 0 --results_directory path_to_results
+    python python_scripts/2_script_patching.py --slide_directory path_to_IHC_slides --slide_type IHC --contours_directory path_to_IHC_contours --patch_size 80 --overlap 0 --results_directory path_to_results
 
     python python_scripts/3_script_embedding.py --slide_directory path_to_IHC_slides --patch_directory path_to_80x80_patches --arch_name clam_or_conch --results_directory path_to_results 
     ```
 
 2. **Intracellular Stain Distribution-Based Analysis:**
 
-    Re-run the `2_script_patching.py` with patch size 512 and 20 overlap (no need to generate ), then perform nuclei segmentation using the SOP model:
+    Run the `1_script_contouring.py` without annotations and `2_script_patching.py` with patch size 512 and 20 overlap, then perform nuclei segmentation using the SOP model:
 
     ```bash
     python python_scripts/4_script_nuclei.py --slide_directory path_to_IHC_slides --patch_directory path_to_512x512_patches --pretrained_weights path_to_pretrained_SOP_model --results_directory path_to_results
