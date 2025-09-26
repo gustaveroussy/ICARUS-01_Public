@@ -10,7 +10,7 @@ library(PairedData)
 library(rstatix)
 
 # Read data, change path accordingly
-df_cluster_perc <- read.csv("./New_cluster_analysis/cluster_percentages_cell_feats_only.csv")
+df_cluster_perc <- read.csv("./BREAST/clustering/New_cluster_analysis/cluster_percentages_cell_feats_only.csv")
 n_clusters <- ncol(df_cluster_perc) - 1
 
 # Prepare compositional data for Dirichlet regression
@@ -90,7 +90,7 @@ extract_id_label <- function(x) {
 }
 
 # Read and plot cluster percentages
-df_cluster_perc_melted <- read.csv("./New_cluster_analysis/cluster_percentages_cell_feats_only_melted.csv")
+df_cluster_perc_melted <- read.csv("./BREAST/clustering/New_cluster_analysis/cluster_percentages_cell_feats_only_melted.csv")
 box_plot <-ggboxplot(df_cluster_perc_melted, x = "Cluster", y = "Percentage",
                      color = "Response.to.treatment", palette = "npg",
                      add = "point", xlab="", ylab="Cluster percentage") + labs(color='Objective response to treatment :') +
@@ -106,14 +106,14 @@ stat.test <- stat.test %>%
   add_xy_position(x = "Cluster", dodge = 0.8)
 
 # Read and plot DAB variance
-df_intracell_distr <- read.csv("./Cell_staining_distribution/cytoplasm_dab_avg_var.csv")
+df_intracell_distr <- read.csv("./BREAST/nuclei_IHC/Cell_staining_distribution/cytoplasm_dab_avg_var.csv")
 box_plot <-ggboxplot(df_intracell_distr, x="Response.to.treatment", y = "cytoplasm_dab_avg_var",
                      color = "Response.to.treatment", palette = "npg",
                      add = "point", xlab="", ylab="Average DAB variance OD") + labs(color='Objective response to treatment :') + stat_compare_means(label = "p.signif", label.x = 1.5, label.y = 0.075)
 box_plot
 
 # Read and reshape data for feature visualization
-df_feats <- read.csv("./New_cluster_analysis/features_cells_feats_only.csv")
+df_feats <- read.csv("./BREAST/clustering/New_cluster_analysis/features_cells_feats_only.csv")
 names(df_feats) <- gsub("_N_cells.*", "", names(df_feats))
 
 # Uncomment to add star 
@@ -125,7 +125,7 @@ df_cell_feats <- df_feats %>%
   pivot_longer(cols = -cluster, names_to = "feature", values_to = "value")
 
 # Uncomment when using cell features with DAB
-#df_cell_feats <- df %>% select(-DAB_avg) %>%
+#df_cell_feats <- df_feats %>% select(-DAB_avg) %>%
 #  pivot_longer(cols = -cluster, names_to = "feature", values_to = "value")
 
 # Plot boxplots for features across clusters
@@ -147,7 +147,7 @@ ggplot(df_feats, aes(x = factor(cluster), y = DAB_avg, fill = factor(cluster))) 
 
 # Comparison between number of patches belonging to each cluster with the number of ERG+ cells
 
-df_ERG = read.csv("./dataset_ERG_cluster_occ_with_dab.csv")
+df_ERG = read.csv("./BREAST_ERG/dataset_ERG_cluster_occ_with_dab.csv")
 df_ERG <- na.omit(df_ERG)
 
 # Plot the correlation between the number of patches belonging to cluster 0 and the number of ERG+ cells using Spearman correlation
@@ -203,7 +203,7 @@ corr_cluster_ERG
 
 # Comparison between the percentage of cluster 0 in the HER3-Dxd positive and negative groups at C1D3
 
-df_HER3_Dxd = read.csv("./dataset_HER3_positivity_cluster_perc_with_dab.csv")
+df_HER3_Dxd = read.csv("./BREAST_on_treatment/dataset_HER3_positivity_cluster_perc_with_dab.csv")
 df_HER3_Dxd = na.omit(df_HER3_Dxd)
 df_HER3_Dxd = df_HER3_Dxd %>% filter(Timepoint %in% c("C1D3"))
 
@@ -227,8 +227,8 @@ ggboxplot(df_HER3_Dxd, x = "group", y = "cluster_0",
 
 # Comparison between the percentage of cluster 0 at baseline and EOT
 
-df_baseline = read.csv("./cluster_percentages_with_DAB_with_info_patients.csv")
-df_eot = read.csv("./cluster_percentages_with_dab_with_info_patients_EOT.csv")
+df_baseline = read.csv("./BREAST/clustering/New_cluster_analysis/cluster_percentages_with_DAB_with_info_patients.csv")
+df_eot = read.csv("./BREAST_EOT/cluster_percentages_with_dab_with_info_patients_EOT.csv")
 
 # Filter data to keep only common IDs
 common_ids <- intersect(df_baseline$Additional.Specimen.ID, df_eot$Additional.Specimen.ID)
